@@ -1,0 +1,15 @@
+<body>
+<ul>
+  <li> The players move is <%= @game[:human_play] %> </li>
+  <li> The computers move is <%= @game[:computer_play] %> </li>
+  <% if @game[:won] == true %>
+  <li> The Player Won! </li>
+  <% elsif @game[:lost] == true %>
+  <li> The Computer Won! Rats! </li>
+  <% else %>
+  <li> A Tie??????? </li>
+  <% end %>
+</ul>
+
+
+</body>

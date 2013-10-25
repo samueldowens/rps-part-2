@@ -12,15 +12,26 @@ class GameApp < Sinatra::Base
   
   post '/result' do
      game = RPSGame.new(params["choice"])
-     result = RPSGameResult.new({human_play: game.play.to_s, computer_play: game.computer_play.to_s, won: game.won?, lost: game.lost?, created_at: Time.now})
-     redirect 'rps_game_result/#{result.id}'
+     result = RPSGameResult.new(game) 
+     db = DB[:games]
+     db.insert(:human_play => game.play.to_s, :computer_play => game.computer_play.to_s, :won => game.won?, :lost => game.lost?, :created_at => game.created_at)
+     recent = db.reverse_order(:id).first
+
+     redirect "rps_game_result/#{recent[:id]}"
   end
 
   get '/rps_game_result/:id' do
-    binding.pry
-    ds = DB[:rps_game]
-    @game = ds.where(:id=>params[:id])
+    db = DB[:games]
+    @game = db[:id => params[:id].to_i]
+    erb :game_result
   end
+
+  get '/rps_game_results' do
+    db = DB[:games]
+    @games = db.reverse_order(:id).first(20)
+    erb :game_results
+  end
+
 
 
   # * POST /rps_game
