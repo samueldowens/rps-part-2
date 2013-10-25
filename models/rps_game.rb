@@ -1,4 +1,4 @@
-class RPSGame
+class RPSGame 
   attr_accessor :play, :computer_play, :created_at
 
   Plays = [:rock, :paper, :scissors]

@@ -44,13 +44,11 @@ class RPSGameResult < Sequel::Model(:games)
   end
 
   def exists?
-    # ds = DB[:rps_game]
-    # variable = ds.where(:id=> @game[:id])
-    # if variable != nil
-    #    true
-    # else 
+    if RPSGameResult.all.include?(self)
+       true
+    else 
       false
-    # end
+    end
   end
 
 end
