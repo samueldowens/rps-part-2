@@ -116,7 +116,7 @@ describe RPSGame do
       game_result.class.should == RPSGameResult
       game_result.exists?.should == false
 
-      game_result.play.should == "rock"
+      game_result.human_play.should == "rock"
       game_result.computer_play.should == "paper"
       game_result.won.should == false
       game_result.created_at.class.should == Time

@@ -1,5 +1,5 @@
 class RPSGame
-  attr_accessor :play, :computer_play
+  attr_accessor :play, :computer_play, :created_at
 
   Plays = [:rock, :paper, :scissors]
 
@@ -18,6 +18,8 @@ class RPSGame
     else
       raise PlayTypeError
     end
+
+    @created_at = Time.now
   end
 
   def self.valid_play?(play)
@@ -34,6 +36,11 @@ class RPSGame
 
   def lost?
     !won? && !tied?
+  end
+
+  def result
+    # binding.pry
+    RPSGameResult.new(self)
   end
 
   class PlayTypeError < Exception
