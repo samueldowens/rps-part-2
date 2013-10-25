@@ -12,7 +12,6 @@ class GameApp < Sinatra::Base
   
   post '/result' do
      game = RPSGame.new(params["choice"])
-     result = RPSGameResult.new(game) 
      db = DB[:games]
      db.insert(:human_play => game.play.to_s, :computer_play => game.computer_play.to_s, :won => game.won?, :lost => game.lost?, :created_at => game.created_at)
      recent = db.reverse_order(:id).first
